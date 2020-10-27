@@ -6,7 +6,7 @@
 [![Software License][ico-license]][link-license]
 [![Source Code][ico-source]][link-source]
 
-Tornado middleware that logs _incoming_ API calls and sends to [Moesif](https://www.moesif.com) for API analytics and log analysis.
+Tornado middleware that automatically logs _incoming_ API calls and sends to [Moesif](https://www.moesif.com) for API analytics and monitoring.
 Supports Python Frameworks built on Tornado.
 
 [Source Code on GitHub](https://github.com/moesif/moesiftornado)
@@ -70,7 +70,7 @@ returns a dictionary (must be able to be encoded into JSON). This allows your
 to associate this event with custom metadata. For example, you may want to save a VM instance_id, a trace_id, or a tenant_id with the request.
 
 #### __`GET_SESSION_TOKEN`__
-(optional) _(handler) => string_, a function that takes a Request handler, and returns a string that is the session token for this event. Again, Moesif tries to get the session token automatically, but if you setup is very different from standard, this function will be very help for tying events together, and help you replay the events.
+(optional) _(handler) => string_, a function that takes a Request handler, and returns a string that is the session token for this event. Again, Moesif tries to get the session token automatically, but if you setup is very different from standard, this function will be very helpful for tying events together, and help you replay the events.
 
 #### __`MASK_EVENT_MODEL`__
 (optional) _(EventModel) => EventModel_, a function that takes an EventModel and returns an EventModel with desired data removed. The return value must be a valid EventModel required by Moesif data ingestion API. For details regarding EventModel please see the [Moesif Python API Documentation](https://www.moesif.com/docs/api?python).
@@ -80,6 +80,9 @@ to associate this event with custom metadata. For example, you may want to save 
 
 #### __`LOG_BODY`__
 (optional) _boolean_, default True, Set to False to remove logging request and response body.
+
+#### __`BATCH_SIZE`__
+(optional) __int__, default 25, Maximum batch size when sending to Moesif.
 
 ### Example:
 

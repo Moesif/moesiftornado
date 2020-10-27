@@ -33,7 +33,6 @@ class LoggerHelper:
     def get_company_id(cls, handler, moesif_config, debug):
         company_id = None
         try:
-            company_id = None
             if 'IDENTIFY_COMPANY' in moesif_config:
                 company_id = moesif_config['IDENTIFY_COMPANY'](handler)
         except Exception as e:
