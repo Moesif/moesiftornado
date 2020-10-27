@@ -40,7 +40,7 @@ class MoesifMiddleware(object):
         self.last_updated_time = datetime.utcnow()
         self.send_async_events = SendEventAsync()
         self.moesif_events_queue = queue.Queue()
-        self.BATCH_SIZE = self.moesif_config.get('BATCH_SIZE', 2)
+        self.BATCH_SIZE = self.moesif_config.get('BATCH_SIZE', 25)
         self.schedule_background_job()
         self.user = User()
         self.company = Company()
@@ -72,7 +72,7 @@ class MoesifMiddleware(object):
                                                                                self.logger_helper.get_company_id(
                                                                                    handler, self.moesif_config, self.DEBUG))
 
-            if self.sampling_percentage >= random_percentage:
+            if self.sampling_percentage > random_percentage:
                 # send the event to moesif via background so not blocking
                 if self.DEBUG:
                     print('Add Event to the queue')
@@ -130,7 +130,7 @@ class MoesifMiddleware(object):
                                                                      self.DEBUG, self.BATCH_SIZE),
                     trigger=IntervalTrigger(seconds=2),
                     id='moesif_events_batch_job',
-                    name='Schedule events batch job every 1 second',
+                    name='Schedule events batch job every 2 second',
                     replace_existing=True)
 
                 # Exit handler when exiting the app
