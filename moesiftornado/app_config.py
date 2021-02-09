@@ -5,6 +5,9 @@ import json
 
 class AppConfig:
 
+    def __init__(self):
+        pass
+
     @classmethod
     def get_config(cls, api_client, debug):
         """Get Config"""

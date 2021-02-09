@@ -3,6 +3,9 @@ import re
 
 class ClientIp:
 
+    def __init__(self):
+        pass
+
     @classmethod
     def is_ip(cls, value):
         if value:

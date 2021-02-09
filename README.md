@@ -84,6 +84,12 @@ to associate this event with custom metadata. For example, you may want to save 
 #### __`BATCH_SIZE`__
 (optional) __int__, default 25, Maximum batch size when sending to Moesif.
 
+#### __`AUTHORIZATION_HEADER_NAME`__
+(optional) _string_, A request header field name used to identify the User in Moesif. Default value is `authorization`. Also, supports a comma separated string. We will check headers in order like `"X-Api-Key,Authorization"`.
+
+#### __`AUTHORIZATION_USER_ID_FIELD`__
+(optional) _string_, A field name used to parse the User from authorization header in Moesif. Default value is `sub`.
+
 ### Example:
 
 ```python
