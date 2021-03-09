@@ -26,7 +26,7 @@ class MoesifMiddleware(object):
 
         if self.moesif_config.get('DEBUG', False):
             Configuration.BASE_URI = self.moesif_config.get('LOCAL_MOESIF_BASEURL', 'https://api.moesif.net')
-
+        Configuration.version = 'moesiftornado-python/0.1.2'
         self.DEBUG = self.moesif_config.get('DEBUG', False)
         self.api_version = self.moesif_config.get('API_VERSION', None)
         self.api_client = self.client.api
