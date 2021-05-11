@@ -29,8 +29,8 @@ class MoesifMiddleware(object):
             raise Exception('Moesif Application ID is required in settings')
 
         if self.moesif_config.get('DEBUG', False):
-            Configuration.BASE_URI = self.moesif_config.get('LOCAL_MOESIF_BASEURL', 'https://api.moesif.net')
-        Configuration.version = 'moesiftornado-python/0.1.3'
+            Configuration.BASE_URI = self.get_configuration_uri(self.moesif_config, 'BASE_URI', 'LOCAL_MOESIF_BASEURL')
+        Configuration.version = 'moesiftornado-python/0.1.4'
         self.DEBUG = self.moesif_config.get('DEBUG', False)
         self.api_version = self.moesif_config.get('API_VERSION', None)
         self.api_client = self.client.api
@@ -50,6 +50,14 @@ class MoesifMiddleware(object):
         self.is_event_job_scheduled = False
         self.user = User()
         self.company = Company()
+
+    # Function to get configuration uri
+    def get_configuration_uri(self, settings, field, deprecated_field):
+        uri = settings.get(field)
+        if uri:
+            return uri
+        else:
+            return settings.get(deprecated_field, 'https://api.moesif.net')
 
     def process_data(self, handler, event_request_time, event_response_time):
         # Prepare Event Request Model
