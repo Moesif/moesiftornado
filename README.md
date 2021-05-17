@@ -90,6 +90,9 @@ to associate this event with custom metadata. For example, you may want to save 
 #### __`AUTHORIZATION_USER_ID_FIELD`__
 (optional) _string_, A field name used to parse the User from authorization header in Moesif. Default value is `sub`.
 
+#### __`BASE_URI`__
+(optional) _string_, A local proxy hostname when sending traffic via secure proxy. Please set this field when using secure proxy. For more details, refer [secure proxy documentation.](https://www.moesif.com/docs/platform/secure-proxy/#2-configure-moesif-sdk)
+
 ### Example:
 
 ```python
